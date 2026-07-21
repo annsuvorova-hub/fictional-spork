@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.timer-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 48px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.timer-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 32px;
+  letter-spacing: -0.3px;
+}
+
+.timer-controls {
+  margin-bottom: 36px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.timer-input {
+  width: 80px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.2s ease;
+  background: #fafbfc;
+  color: #1a1a1a;
+  font-family: inherit;
+}
+
+.timer-input:focus {
+  outline: none;
+  border-color: #7c3aed;
+  background: #ffffff;
+}
+
+.timer-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer-input::-webkit-inner-spin-button,
+.timer-input::-webkit-outer-spin-button {
+  opacity: 0.5;
+}
+
+.timer-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-label {
+  font-size: 15px;
+  color: #718096;
+  font-weight: 400;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+  min-width: 72px;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2d2d2d;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #2d3748;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #718096;
+  border: 1.5px solid #e2e8f0;
+}
+
+.btn-outline:hover:not(:disabled) {
+  border-color: #a0aec0;
+  color: #4a5568;
+  background: #fafbfc;
+}
+
+.timer-display {
+  margin: 0 auto;
+  position: relative;
+}
+
+.progress-ring {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.ring-bg {
+  fill: none;
+  stroke: #edf2f7;
+  stroke-width: 6;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #1a1a1a;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 816.81;
+  stroke-dashoffset: 816.81;
+  transform: rotate(-90deg);
+  transform-origin: 150px 150px;
+  transition: stroke-dashoffset 0.3s ease, stroke 0.4s ease;
+}
+
+.ring-time {
+  font-size: 44px;
+  font-weight: 600;
+  fill: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+  letter-spacing: 1px;
+  dominant-baseline: central;
+}
+
+.ring-status {
+  font-size: 13px;
+  fill: #a0aec0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  dominant-baseline: central;
+}
+
+/* Состояния с фиолетовым цветом */
+.timer-container.finished .ring-progress {
+  stroke: #7c3aed;
+}
+
+.timer-container.finished .ring-time {
+  fill: #7c3aed;
+}
+
+.timer-container.finished .ring-status {
+  fill: #7c3aed;
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    transform: rotate(-90deg) scale(1);
+  }
+  50% {
+    transform: rotate(-90deg) scale(1.02);
+  }
+}
+
+.timer-container.finished .ring-progress {
+  animation: ringPulse 0.6s ease-in-out 2;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .timer-container {
+    padding: 28px 20px;
+  }
+
+  .timer-title {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .button-group {
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .ring-time {
+    font-size: 36px;
+  }
+
+  .ring-status {
+    font-size: 12px;
+  }
+
+  .progress-ring {
+    max-width: 220px;
+  }
+
+  .timer-input {
+    width: 72px;
+    font-size: 15px;
+    padding: 6px 10px;
+  }
+
+  .input-label {
+    font-size: 14px;
+  }
+}
